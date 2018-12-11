@@ -1,0 +1,41 @@
+<ul id='msg-list' class='row' style='list-style: none; min-height:200px; padding: 10px;'></ul>
+
+<div class="row">
+  <div class="col-xs-3">
+    <input type="text" id="name" class="form-control" placeholder="Your Name" autofocus>
+  </div>
+  <div class="col-xs-9">
+    <input type="text" id="msg" class="form-control" placeholder="Your Message">
+  </div>
+</div>
+
+<h1>Listing Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Encrypted password</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for user <- @users do %>
+    <tr>
+      <td><%= link user.username, to: "", class: "users" %></td>
+      <script>
+      </script>
+<!--       <td><%= user.encrypted_password %></td>-->
+
+      <td>
+        <%= link "Show", to: Routes.user_path(@conn, :show, user) %>
+        <%= link "Edit", to: Routes.user_path(@conn, :edit, user) %>
+        <%= link "Delete", to: Routes.user_path(@conn, :delete, user), method: :delete, data: [confirm: "Are you sure?"] %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New User", to: Routes.user_path(@conn, :new) %></span>
